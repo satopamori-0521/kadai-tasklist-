@@ -4,8 +4,7 @@ class TasksController < ApplicationController
     
     def index
         if logged_in?
-            @task =current_user.tasks.build
-            @tasks =current_user.tasks.order(id: :desc).page(params[:page])
+            @tasks = current_user.tasks.order(id: :desc).page(params[:page])
         end
     end
     
@@ -51,7 +50,7 @@ class TasksController < ApplicationController
     private
     
     def set_task
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find_by(id: params[:id])
     end
     
     def task_params
